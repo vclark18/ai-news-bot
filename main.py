@@ -62,6 +62,16 @@ async def send_weekly_digest():
                 digest = fetch_weekly_digest()
                 await channel.send("📅 **Weekly Global Digest:**")
                 for item in digest:
-                    await channel.send(item)
+                    await cha
+                    from discord.ext import commands
+
+bot = commands.Bot(command_prefix='!')
+
+@bot.command()
+async def test(ctx):
+    await ctx.send("✅ Bot is up and running!")
+
+bot.run("YOUR_BOT_TOKEN")
+nnel.send(item)
 
 bot.run(DISCORD_TOKEN)
