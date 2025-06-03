@@ -71,7 +71,7 @@ bot = commands.Bot(command_prefix='!')
 async def test(ctx):
     await ctx.send("✅ Bot is up and running!")
 
-bot.run("ai_news-bot")
+bot.run(daily_news-bot)
 nnel.send(item)
 
 bot.run(DISCORD_TOKEN)
