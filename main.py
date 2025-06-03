@@ -13,7 +13,7 @@ DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 CHANNEL_NAME = "general"
 
 intents = discord.Intents.default()
-intents.messages = True
+intents.message_content = True  # <-- CRITICAL for command handling
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 def summarize_article(article):
@@ -55,23 +55,18 @@ async def send_daily_news():
 
 @tasks.loop(time=datetime.time(hour=5, minute=0))  # 5 AM EST
 async def send_weekly_digest():
-    if datetime.datetime.today().weekday() == 0:
+    if datetime.datetime.today().weekday() == 0:  # Monday only
         for guild in bot.guilds:
             channel = discord.utils.get(guild.text_channels, name=CHANNEL_NAME)
             if channel:
                 digest = fetch_weekly_digest()
                 await channel.send("📅 **Weekly Global Digest:**")
                 for item in digest:
-                    await cha
-                    from discord.ext import commands
-
-bot = commands.Bot(command_prefix='!')
+                    await channel.send(item)
 
 @bot.command()
 async def test(ctx):
     await ctx.send("✅ Bot is up and running!")
 
-bot.run(daily_news-bot)
-nnel.send(item)
-
 bot.run(DISCORD_TOKEN)
+
