@@ -43,7 +43,7 @@ async def on_ready():
     send_daily_news.start()
     send_weekly_digest.start()
 
-@tasks.loop(time=datetime.time(hour=1, minute=37))  # 8:37 PM EST / 1:37 AM UTC
+@tasks.loop(time=datetime.time(hour=0, minute=45))  # 8:37 PM EST / 1:37 AM UTC
 async def send_daily_news():
     for guild in bot.guilds:
         channel = discord.utils.get(guild.text_channels, name=CHANNEL_NAME)
@@ -53,7 +53,7 @@ async def send_daily_news():
             for item in news:
                 await channel.send(item)
 
-@tasks.loop(time=datetime.time(hour=1, minute=37))  # 8:37 PM EST / 1:37 AM UTC
+@tasks.loop(time=datetime.time(hour=0, minute=45))  # 8:37 PM EST / 1:37 AM UTC
 async def send_weekly_digest():
     if datetime.datetime.today().weekday() == 0:  # Monday
         for guild in bot.guilds:
