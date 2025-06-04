@@ -10,6 +10,7 @@ keep_alive()
 
 load_dotenv()
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+GNEWS_API_KEY = os.getenv("GNEWS_API_KEY")
 CHANNEL_NAME = "general"
 
 intents = discord.Intents.default()
@@ -43,7 +44,7 @@ async def on_ready():
     send_daily_news.start()
     send_weekly_digest.start()
 
-@tasks.loop(time=datetime.time(hour=0, minute=51))  # 8:37 PM EST / 1:37 AM UTC
+@tasks.loop(time=datetime.time(hour=0, minute=55))  # 8:37 PM EST / 1:37 AM UTC
 async def send_daily_news():
     for guild in bot.guilds:
         channel = discord.utils.get(guild.text_channels, name=CHANNEL_NAME)
