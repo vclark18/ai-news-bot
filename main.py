@@ -20,7 +20,7 @@ def summarize_article(article):
     return f"📰 **{article['title']}**\n{article['description']}\n<{article['url']}>"
 
 def fetch_ai_news():
-    response = requests.get("https://gnews.io/api/v4/search?q=AI+OR+technology&lang=en&token=demo")
+    response = requests.get("https://gnews.io/api/v4/search?q=AI+OR+technology&lang=en&token={GNEWS_API_KEY}")
     if response.status_code == 200:
         articles = response.json().get("articles", [])[:3]
         return [summarize_article(article) for article in articles]
@@ -30,7 +30,7 @@ def fetch_weekly_digest():
     topics = ["climate OR environment", "global politics OR geopolitics"]
     summaries = []
     for topic in topics:
-        response = requests.get(f"https://gnews.io/api/v4/search?q={topic}&lang=en&token=demo")
+        response = requests.get(f"https://gnews.io/api/v4/search?q={topic}&lang=en&token={GNEWS_API_KEY}")
         if response.status_code == 200:
             articles = response.json().get("articles", [])[:3]
             summaries.append(f"🌍 **{topic.title()}**")
